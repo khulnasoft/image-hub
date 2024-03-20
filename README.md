@@ -1,29 +1,29 @@
-<p style="text-align:center;"><a href="https://khulnasoft.io/meshery"><img align="left" style="margin-bottom:20px;" src="img/readme/khulnasoft-image-hub.svg"  height="125px" /></a><h1>KhulnaSoft Image Hub</h1></p>
+<p style="text-align:center;"><a href="https://khulnasoft.com/meshplay"><img align="left" style="margin-bottom:20px;" src="img/readme/khulnasoft-image-hub.svg"  height="125px" /></a><h1>KhulnaSoft Image Hub</h1></p>
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/khulnasoft/image-hub)](https://goreportcard.com/report/github.com/khulnasoft/image-hub)
 [![GitHub](https://img.shields.io/github/license/khulnasoft/image-hub.svg)](LICENSE)
-[![GitHub issues by-label](https://img.shields.io/github/issues/khulnasoft/meshery/help%20wanted.svg)](https://github.com/issues?utf8=✓&q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Akhulnasoft+label%3A%22help+wanted%22+")
-[![Website](https://img.shields.io/website/https/khulnasoft.io/meshery.svg)](https://khulnasoft.io/)
+[![GitHub issues by-label](https://img.shields.io/github/issues/khulnasoft/meshplay/help%20wanted.svg)](https://github.com/issues?utf8=✓&q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Akhulnasoft+label%3A%22help+wanted%22+")
+[![Website](https://img.shields.io/website/https/khulnasoft.com/meshplay.svg)](https://khulnasoft.com/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/khulnasoft.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=khulnasoft)
-[![Slack](https://img.shields.io/badge/Slack-@khulnasoft.svg?logo=slack)](http://slack.khulnasoft.io)
+[![Slack](https://img.shields.io/badge/Slack-@khulnasoft.svg?logo=slack)](http://slack.khulnasoft.com)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3564/badge)](https://bestpractices.coreinfrastructure.org/projects/3564)
 
 <p align="center"><i>If you’re using the Image Hub or if you like other KhulnaSoft projects, please <a href="https://github.com/khulnasoft/image-hub/stargazers">★</a> star this repository to show your support! 🤩</i></p>
 
 ## Image Hub
-Image Hub is a sample application written to run on [Consul](https://meshery.khulnasoft.io/docs/service-meshes/adapters/consul) for exploring WebAssembly modules used as Envoy filters. This demo application has been enabled by experimental works of [Nic Jackson](https://twitter.com/sheriffjackson) of HashiCorp, and [Kanishkar J](https://twitter.com/_kanishkarj_), [Lee Calcote](https://twitter.com/lcalcote), and other contributors of KhulnaSoft.
+Image Hub is a sample application written to run on [Consul](https://meshplay.khulnasoft.com/docs/service-meshes/adapters/consul) for exploring WebAssembly modules used as Envoy filters. This demo application has been enabled by experimental works of [Nic Jackson](https://twitter.com/sheriffjackson) of HashiCorp, and [Kanishkar J](https://twitter.com/_kanishkarj_), [Lee Calcote](https://twitter.com/lcalcote), and other contributors of KhulnaSoft.
 
 
 ## Deployment Instructions
 
 Image Hub supports Envoy-based data planes. Deployment instructions for each supported service mesh are below.
 
-### Using Istio (pending [PR #196](https://github.com/khulnasoft/meshery-istio/pull/196)+release; clone and do make run for now):
-1) Use [Meshery](https://github.com/khulnasoft/meshery) to deploy [istio](https://github.com/khulnasoft/advanced-istio-service-mesh-workshop/blob/master/lab-1/README.md) and the Image Hub sample application (Management > Istio > Manage Sample Application Lifecycle > Image-Hub ) onto the Istio service mesh.
-2) To map `imagehub.meshery.io` to the appropriate IP, run the following command to add the appropriate entry in the `"\etc\hosts"` file: 
+### Using Istio (pending [PR #196](https://github.com/khulnasoft/meshplay-istio/pull/196)+release; clone and do make run for now):
+1) Use [Meshery](https://github.com/khulnasoft/meshplay) to deploy [istio](https://github.com/khulnasoft/advanced-istio-service-mesh-workshop/blob/master/lab-1/README.md) and the Image Hub sample application (Management > Istio > Manage Sample Application Lifecycle > Image-Hub ) onto the Istio service mesh.
+2) To map `imagehub.meshplay.khulnasoft.com` to the appropriate IP, run the following command to add the appropriate entry in the `"\etc\hosts"` file: 
 
     ```
-    echo $(kubectl get nodes --selector=kubernetes.io/role!=master -o jsonpath={.items[0].status.addresses[?\(@.type==\"InternalIP\"\)].address})'    'imagehub.meshery.io | sudo tee -a /etc/hosts
+    echo $(kubectl get nodes --selector=kubernetes.io/role!=master -o jsonpath={.items[0].status.addresses[?\(@.type==\"InternalIP\"\)].address})'    'imagehub.meshplay.khulnasoft.com | sudo tee -a /etc/hosts
     ```
 3) To get the environment port, run the following command:
     ```
@@ -31,7 +31,7 @@ Image Hub supports Envoy-based data planes. Deployment instructions for each sup
     ```
 4) Access the web UI using:
     ```
-    http://imagehub.meshery.io:<environment port>
+    http://imagehub.meshplay.khulnasoft.com:<environment port>
     ```
 
 
@@ -44,7 +44,7 @@ Image Hub supports Envoy-based data planes. Deployment instructions for each sup
     helm install consul hashicorp/consul -f config/consul-values.yaml # Setup custom Consul with support for WASM
     ```
 
-2) Use [Meshery](https://github.com/khulnasoft/meshery) to deploy the Image Hub sample application onto the Consul service mesh.
+2) Use [Meshery](https://github.com/khulnasoft/meshplay) to deploy the Image Hub sample application onto the Consul service mesh.
 
 3) Find the port assigned to the `ingess` service:
 
@@ -63,7 +63,7 @@ Image Hub supports Envoy-based data planes. Deployment instructions for each sup
 1. After signing up, you should be redirected to the login page, where you can log in and start using the sample app.
 1. On the main page, open up the network tab, and reload the page. This will allow you to see the request-response of the app.
 1. Go ahead and click the download button a couple of times. You'll notice that there is nothing actually limiting you from crossing the number of pulls according to the plan you chose!
-1. Alternatively, you could test the above by navigating to http://imagehub.meshery.io:<environment port>/pull and then looking at the request-responses.
+1. Alternatively, you could test the above by navigating to http://imagehub.meshplay.khulnasoft.com:<environment port>/pull and then looking at the request-responses.
 
 ## Deploying the Rate Limiter WASM Filter for Envoy
 
@@ -90,7 +90,7 @@ the command `kubectl delete pods <exact web pod name> <exact api pod name>`. Thi
 ![Service Mesh Architecture - Consul](img/readme/service-mesh-architecture-consul.png)
 
 ### Image Hub deployed on Consul
-![Meshery and WASM](img/readme/image-hub-on-consul-with-wasm-and-meshery.png)
+![Meshery and WASM](img/readme/image-hub-on-consul-with-wasm-and-meshplay.png)
 
 ## Presentations
 
@@ -103,16 +103,16 @@ the command `kubectl delete pods <exact web pod name> <exact api pod name>`. Thi
 ## Join the Community!
 
 <a name="contributing"></a><a name="community"></a>
-Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://docs.google.com/document/d/17OPtDE_rdnPQxmk2Kauhm3GwXF1R5dZ3Cj8qZLKdo5E/edit">KhulnaSoft Community Welcome Guide</a> for a tour of resources available to you and jump into our <a href="http://slack.khulnasoft.io">Slack</a>!
+Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://docs.google.com/document/d/17OPtDE_rdnPQxmk2Kauhm3GwXF1R5dZ3Cj8qZLKdo5E/edit">KhulnaSoft Community Welcome Guide</a> for a tour of resources available to you and jump into our <a href="http://slack.khulnasoft.com">Slack</a>!
 
-<a href="https://meshery.io/community"><img alt="KhulnaSoft Cloud Native Community" src="img/readme/community.svg" style="margin-right:8px;padding-top:5px;" width="140px" align="left" /></a>
+<a href="https://meshplay.khulnasoft.com/community"><img alt="KhulnaSoft Cloud Native Community" src="img/readme/community.svg" style="margin-right:8px;padding-top:5px;" width="140px" align="left" /></a>
 
-<a href="https://slack.meshery.io">
+<a href="https://slack.meshplay.khulnasoft.com">
 
 <picture align="right">
   <source media="(prefers-color-scheme: dark)" srcset="img/readme/slack-dark-128.png"  width="110px" align="right" style="margin-left:10px;margin-top:10px;">
   <source media="(prefers-color-scheme: light)" srcset="img/readme/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:5px;">
-  <img alt="Shows an illustrated light mode meshery logo in light color mode and a dark mode meshery logo dark color mode." src="img/readme/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:13px;">
+  <img alt="Shows an illustrated light mode meshplay logo in light color mode and a dark mode meshplay logo dark color mode." src="img/readme/slack-128.png" width="110px" align="right" style="margin-left:10px;padding-top:13px;">
 </picture>
 </a>
 
@@ -120,19 +120,19 @@ Our projects are community-built and welcome collaboration. 👍 Be sure to see 
 <p>
 ✔️ <em><strong>Join</strong></em> any or all of the weekly meetings on the <a href="https://calendar.google.com/calendar/b/1?cid=bGF5ZXI1LmlvX2VoMmFhOWRwZjFnNDBlbHZvYzc2MmpucGhzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20">community calendar</a>.<br />
 ✔️ <em><strong>Watch</strong></em> community <a href="https://www.youtube.com/channel/UCFL1af7_wdnhHXL1InzaMvA?sub_confirmation=1">meeting recordings</a>.<br />
-✔️ <em>Fill-in</em> a <a href="https://khulnasoft.io/newcomers">community member form</a> to gain access to community resources.</li>
+✔️ <em>Fill-in</em> a <a href="https://khulnasoft.com/newcomers">community member form</a> to gain access to community resources.</li>
 <br />
-✔️ <em><strong>Discuss</strong></em> in the <a href="https://discuss.khulnasoft.io">Community Forum</a>.<br />
+✔️ <em><strong>Discuss</strong></em> in the <a href="https://discuss.khulnasoft.com">Community Forum</a>.<br />
 </p>
 <p align="center">
-<i>Not sure where to start?</i> Grab an open issue with the <a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Akhulnasoft+org%3Ameshery+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22help+wanted%22+">help-wanted label</a>.
+<i>Not sure where to start?</i> Grab an open issue with the <a href="https://github.com/issues?q=is%3Aopen+is%3Aissue+archived%3Afalse+org%3Akhulnasoft+org%3Ameshplay+org%3Aservice-mesh-performance+org%3Aservice-mesh-patterns+label%3A%22help+wanted%22+">help-wanted label</a>.
 </p>
 
 <div>&nbsp;</div>
 
 ### About KhulnaSoft
 
-[KhulnaSoft](https://khulnasoft.io)'s cloud native application and infrastructure management software enables organizations to expect more from their infrastructure. We embrace developer-defined infrastructure. We empower engineer to change how they write applications, support operators in rethinking how they run modern infrastructure and enable product owners to regain full control over their product portfolio.
+[KhulnaSoft](https://khulnasoft.com)'s cloud native application and infrastructure management software enables organizations to expect more from their infrastructure. We embrace developer-defined infrastructure. We empower engineer to change how they write applications, support operators in rethinking how they run modern infrastructure and enable product owners to regain full control over their product portfolio.
 
 **License**
 

@@ -1,0 +1,48 @@
+name: Image Hub
+on:
+  push:
+    branches:
+      - '*'
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  docker:
+    name: Docker build and push
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master') && success()
+      uses: actions/checkout@master
+      with:
+        fetch-depth: 1
+    - name: Docker login
+      if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master') && success()
+      uses: azure/docker-login@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+    - name: Docker build & push - envoy
+      if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master') && success()
+      run: |
+        cd rate-limit-filter && DOCKER_BUILDKIT=1 docker build --no-cache -t khulnasoft/image-hub-envoy .
+        docker tag khulnasoft/image-hub-envoy:latest khulnasoft/image-hub-envoy:${GITHUB_SHA::8}
+        docker push khulnasoft/image-hub-envoy:${GITHUB_SHA::8}
+        docker push khulnasoft/image-hub-envoy:latest
+    - name: Docker build & push - api
+      if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master') && success()
+      run: |
+        cd api && DOCKER_BUILDKIT=1 docker build --no-cache -t khulnasoft/image-hub-api .
+        docker tag khulnasoft/image-hub-api:latest khulnasoft/image-hub-api:${GITHUB_SHA::8}
+        docker push khulnasoft/image-hub-api:${GITHUB_SHA::8}
+        docker push khulnasoft/image-hub-api:latest
+    - name: Docker build & push - web
+      if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/master') && success()
+      run: |
+        cd web && DOCKER_BUILDKIT=1 docker build --no-cache -t khulnasoft/image-hub-web .
+        docker tag khulnasoft/image-hub-web:latest khulnasoft/image-hub-web:${GITHUB_SHA::8}
+        docker push khulnasoft/image-hub-web:${GITHUB_SHA::8}
+        docker push khulnasoft/image-hub-web:latest

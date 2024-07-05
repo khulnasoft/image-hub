@@ -1,4 +1,4 @@
-<p style="text-align:center;"><a href="https://khulnasoft.com/meshplay"><img align="left" style="margin-bottom:20px;" src="img/readme/khulnasoft-image-hub.svg"  height="125px" /></a><h1>KhulnaSoft Image Hub</h1></p>
+<p style="text-align:center;"><img align="left" style="margin-bottom:20px;" src="https://avatars.githubusercontent.com/u/43526139?s=200&v=4"  height="125px" /></a><h1>KhulnaSoft Image Hub</h1></p>
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/khulnasoft/image-hub)](https://goreportcard.com/report/github.com/khulnasoft/image-hub)
 [![GitHub](https://img.shields.io/github/license/khulnasoft/image-hub.svg)](LICENSE)

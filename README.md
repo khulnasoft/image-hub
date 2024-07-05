@@ -19,7 +19,7 @@ Image Hub is a sample application written to run on [Consul](https://meshplay.kh
 Image Hub supports Envoy-based data planes. Deployment instructions for each supported service mesh are below.
 
 ### Using Istio (pending [PR #196](https://github.com/khulnasoft/meshplay-istio/pull/196)+release; clone and do make run for now):
-1) Use [Meshery](https://github.com/khulnasoft/meshplay) to deploy [istio](https://github.com/khulnasoft/advanced-istio-service-mesh-workshop/blob/master/lab-1/README.md) and the Image Hub sample application (Management > Istio > Manage Sample Application Lifecycle > Image-Hub ) onto the Istio service mesh.
+1) Use [Meshplay](https://github.com/khulnasoft/meshplay) to deploy [istio](https://github.com/khulnasoft/advanced-istio-service-mesh-workshop/blob/master/lab-1/README.md) and the Image Hub sample application (Management > Istio > Manage Sample Application Lifecycle > Image-Hub ) onto the Istio service mesh.
 2) To map `imagehub.meshplay.khulnasoft.com` to the appropriate IP, run the following command to add the appropriate entry in the `"\etc\hosts"` file: 
 
     ```
@@ -44,7 +44,7 @@ Image Hub supports Envoy-based data planes. Deployment instructions for each sup
     helm install consul hashicorp/consul -f config/consul-values.yaml # Setup custom Consul with support for WASM
     ```
 
-2) Use [Meshery](https://github.com/khulnasoft/meshplay) to deploy the Image Hub sample application onto the Consul service mesh.
+2) Use [Meshplay](https://github.com/khulnasoft/meshplay) to deploy the Image Hub sample application onto the Consul service mesh.
 
 3) Find the port assigned to the `ingess` service:
 
@@ -78,7 +78,7 @@ the command `kubectl delete pods <exact web pod name> <exact api pod name>`. Thi
 1. Sign up a new user and select a subscription plan.
 1. Log in as that user.
 1. Test your ability to "pull" an image. You should be able to pull an image.
-1. Open Meshery's performance management page (http://localhost:9081/performance)
+1. Open Meshplay's performance management page (http://localhost:9081/performance)
 1. Configure a performance test against http://x.x.x.x:31118/api/pull (where x.x.x.x is your machine's host IP address, not "localhost")
 1. Enter `{ "authorization" : "<your user's token>" }`
 1. Run the performance test. See that your subscription plan limit is enforced accordingly.
@@ -90,7 +90,7 @@ the command `kubectl delete pods <exact web pod name> <exact api pod name>`. Thi
 ![Service Mesh Architecture - Consul](img/readme/service-mesh-architecture-consul.png)
 
 ### Image Hub deployed on Consul
-![Meshery and WASM](img/readme/image-hub-on-consul-with-wasm-and-meshplay.png)
+![Meshplay and WASM](img/readme/image-hub-on-consul-with-wasm-and-meshplay.png)
 
 ## Presentations
 
